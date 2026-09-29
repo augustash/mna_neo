@@ -1,0 +1,265 @@
+/*
+ * The MNA look shared by the components here and the site's own: the scales
+ * the exo_alchemist components of augustash/mna_theme 1.x were styled with
+ * (ash's component mixins), as Tailwind utilities.
+ *
+ * Fluid sizes grow linearly from 752px to 1920px, the legacy "medium" and
+ * "xlarge" breakpoints, and hold outside them.
+ */
+
+/*
+ * Fluid type: --fmin px at 752px to --fmax px at 1920px.
+ * `fluid-text [--fmin:14] [--fmax:16]`.
+ */
+@utility fluid-text {
+  font-size: clamp(
+    calc(var(--fmin) * 1px),
+    calc(var(--fmin) * 1px + (var(--fmax) - var(--fmin)) * ((100vw - 752px) / 1168)),
+    calc(var(--fmax) * 1px)
+  );
+}
+
+/*
+ * Title grades. The heading prop's size puts `title-sm|md|lg` on the heading
+ * wrapper; here they pick the legacy small, normal and large scales that
+ * mna-supertitle, mna-title and mna-subtitle read. `md` is the default.
+ */
+.title-sm {
+  --mna-supertitle-min: 14;
+  --mna-supertitle-max: 16;
+  --mna-title-min: 24;
+  --mna-title-max: 28;
+  --mna-subtitle-min: 14;
+  --mna-subtitle-max: 16;
+}
+
+.title-lg {
+  --mna-title-min: 30;
+  --mna-title-max: 48;
+}
+
+/* Body copy: near-black on light schemes, white on dark ones. */
+@utility mna-ink {
+  color: #1a1a1a;
+
+  @variant dark {
+    color: #fff;
+  }
+}
+
+/*
+ * Heading copy: the legacy theme-base grey, `strong` in primary; white on
+ * dark. A component with its own heading colour sets --mna-title-color (and
+ * --mna-title-color-dark).
+ */
+@utility mna-title-ink {
+  color: var(--mna-title-color, #373a3c);
+
+  & strong {
+    color: rgb(var(--color-primary-500));
+  }
+
+  @variant dark {
+    color: var(--mna-title-color-dark, #fff);
+
+    & strong {
+      color: #fff;
+    }
+  }
+}
+
+/* Supertitle: uppercase, 1px tracking, 16–18px (small 14–16px). */
+@utility mna-supertitle {
+  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  --fmin: var(--mna-supertitle-min, 16);
+  --fmax: var(--mna-supertitle-max, 18);
+  @apply fluid-text;
+}
+
+/* Title: bold, line-height 1.1, 28–38px (small 24–28px, large 30–48px). */
+@utility mna-title {
+  line-height: 1.1;
+  font-weight: 700;
+  --fmin: var(--mna-title-min, 28);
+  --fmax: var(--mna-title-max, 38);
+  @apply fluid-text mna-title-ink;
+}
+
+/* Subtitle: bold uppercase, 1px tracking, 16–18px (small 14–16px). */
+@utility mna-subtitle {
+  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  font-weight: 700;
+  --fmin: var(--mna-subtitle-min, 16);
+  --fmax: var(--mna-subtitle-max, 18);
+  @apply fluid-text;
+}
+
+/* Description: 80% opacity, 16–18px. */
+@utility mna-description {
+  opacity: 0.8;
+  --fmin: 16;
+  --fmax: 18;
+  @apply fluid-text;
+}
+
+/*
+ * Rich text as the legacy theme set it (Foundation's typography): paragraphs
+ * and lists at line-height 1.6 with 1rem below (none below a paragraph that
+ * ends its container), lists indented 1.25rem,
+ * headings in the system sans at Foundation's small and medium (from 752px)
+ * sizes, and a hairline blockquote.
+ */
+@utility mna-prose {
+  & :where(p) {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+
+  & :where(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  & :where(ul, ol) {
+    margin: 0 0 1rem 1.25rem;
+    line-height: 1.6;
+    list-style-position: outside;
+  }
+
+  & :where(ul) {
+    list-style-type: disc;
+  }
+
+  & :where(ol) {
+    list-style-type: decimal;
+  }
+
+  & :where(li ul, li ol) {
+    margin-bottom: 0;
+  }
+
+  & :where(h1, h2, h3, h4, h5, h6) {
+    margin: 0 0 0.5rem;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  & :where(h1) { font-size: 1.5rem; }
+  & :where(h2) { font-size: 1.25rem; }
+  & :where(h3) { font-size: 1.1875rem; }
+  & :where(h4) { font-size: 1.125rem; }
+  & :where(h5) { font-size: 1.0625rem; }
+  & :where(h6) { font-size: 1rem; }
+
+  @media (width >= 47em) {
+    & :where(h1) { font-size: 3rem; }
+    & :where(h2) { font-size: 2.5rem; }
+    & :where(h3) { font-size: 1.9375rem; }
+    & :where(h4) { font-size: 1.5625rem; }
+    & :where(h5) { font-size: 1.25rem; }
+  }
+
+  & :where(strong, b) {
+    font-weight: 700;
+  }
+
+  & :where(em, i) {
+    font-style: italic;
+  }
+
+  & :where(blockquote) {
+    margin: 0 0 1rem;
+    padding: 0.5625rem 1.25rem 0 1.1875rem;
+    border-left: 1px solid #cacaca;
+    color: #333;
+  }
+}
+
+/*
+ * Short descriptions (the legacy limited format: paragraphs, links, bold and
+ * italic): the description's own line height, paragraphs 1rem apart. Legacy
+ * showed these as bare text, so a single paragraph looks as it did.
+ */
+@utility mna-paragraphs {
+  & :where(p) {
+    margin: 0 0 1rem;
+  }
+
+  & :where(p:last-child) {
+    margin-bottom: 0;
+  }
+}
+
+/*
+ * The component links (ash's component-links): a solid button, then an
+ * outline one. Neo's btn with the legacy colours per scheme: secondary fill
+ * with a primary hover; white on primary; an outline in white on dark
+ * schemes. Phones stack them full width.
+ */
+@utility mna-btn {
+  @apply btn;
+  --btn-font-size: clamp(13px, calc(13px + 2 * ((100vw - 752px) / 1168)), 15px);
+  --btn-bg-color: #892020;
+  --btn-content-color: #fff;
+  --btn-border-color: #892020;
+  --btn-bg-color-hover: rgb(var(--color-primary-500));
+  --btn-content-color-hover: #fff;
+  --btn-border-color-hover: rgb(var(--color-primary-500));
+
+  @variant primary-solid {
+    --btn-bg-color: #fff;
+    --btn-content-color: rgb(var(--color-primary-500));
+    --btn-border-color: #fff;
+    --btn-bg-color-hover: #892020;
+    --btn-border-color-hover: #892020;
+  }
+
+  @variant secondary-solid {
+    --btn-bg-color: #fff;
+    --btn-content-color: rgb(var(--color-primary-500));
+    --btn-border-color: #fff;
+    --btn-bg-color-hover: rgb(var(--color-primary-500));
+    --btn-border-color-hover: rgb(var(--color-primary-500));
+  }
+
+  @media (width < 47em) {
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+
+@utility mna-btn-outline {
+  @apply mna-btn;
+  --btn-bg-color: transparent;
+  --btn-content-color: #892020;
+  --btn-bg-color-hover: #892020;
+  --btn-border-color-hover: #892020;
+
+  @variant dark {
+    --btn-content-color: #fff;
+    --btn-border-color: #fff;
+    --btn-bg-color-hover: #892020;
+    --btn-border-color-hover: #892020;
+  }
+
+  /* Restated for the schemes mna-btn gives a white fill. */
+  @variant primary-solid {
+    --btn-bg-color: transparent;
+    --btn-content-color: #fff;
+    --btn-border-color: #fff;
+    --btn-bg-color-hover: #892020;
+    --btn-border-color-hover: #892020;
+  }
+
+  @variant secondary-solid {
+    --btn-bg-color: transparent;
+    --btn-content-color: #fff;
+    --btn-border-color: #fff;
+    --btn-bg-color-hover: rgb(var(--color-primary-500));
+    --btn-border-color-hover: rgb(var(--color-primary-500));
+  }
+}

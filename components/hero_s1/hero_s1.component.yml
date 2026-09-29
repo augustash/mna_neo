@@ -1,0 +1,36 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: 'Hero S1'
+status: stable
+description: 'A page heading with a short description and up to two buttons, no image.'
+neo: true
+props:
+  type: object
+  properties:
+    heading:
+      type: heading
+      title: 'Heading'
+      examples:
+        title: 'Page title'
+    description:
+      type: markup
+      title: 'Description'
+      examples: '<p>Vivamus a iaculis nibh. Proin pellentesque nec nulla eget convallis.</p>'
+    links:
+      type: array
+      title: 'Links'
+      maxItems: 2
+      items:
+        type: object
+        title: 'Link'
+        properties:
+          link:
+            type: link
+            title: 'Link'
+      examples:
+        - { link: { uri: 'internal:/', title: 'Primary link' } }
+    spacing:
+      type: spacing
+      title: 'Spacing'
+      examples: md
+    gap:
+      type: gap

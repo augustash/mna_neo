@@ -1,0 +1,18 @@
+{#
+  Text S1 — rich text, at most 800px wide, and buttons below it.
+  - `position: center` centres the column in the container, and the buttons
+    in the column; the text stays left-aligned.
+  - The text's last margin goes: under the legacy theme it collapsed into the
+    section's.
+#}
+{% set center = position == 'center' %}
+<div {{ attributes.addClass('mna-ink') }}>
+  <div class="container-center px-4">
+    <div class="max-w-200 {{ center ? 'mx-auto' }}">
+      {% if content %}
+        <div class="mna-prose [&>:last-child]:mb-0">{{ content }}</div>
+      {% endif %}
+      {% include '@mna_neo/includes/links.html.twig' with {links: links, class: 'mt-4 md:mt-6 lg:mt-7' ~ (center ? ' text-center')} only %}
+    </div>
+  </div>
+</div>

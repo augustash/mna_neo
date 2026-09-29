@@ -1,0 +1,22 @@
+{#
+  Webform S1 — a heading and a webform in a centred 500px column.
+  - The heading is the section spacing below the section's top; the form
+    has the section spacing above and below it.
+  - As a page's first or last section it takes the page offsets
+    (--spacing-component-t/-b, front's _utilities.css).
+#}
+<div {{ attributes.addClass(['flex', 'bg-default', 'component-bg', 'mna-ink', 'pt-[var(--spacing-component-t,0px)]', 'pb-[var(--spacing-component-b,0px)]']) }}>
+  <div class="mx-auto w-full max-w-125">
+    {% if heading or description %}
+      <div{{ heading.size.addClass(['space-y-4', 'mt-8', 'md:mt-12', 'lg:mt-14']) }}>
+        {% if heading.supertitle %}<div class="mna-supertitle">{{ heading.supertitle }}</div>{% endif %}
+        {% if heading.title %}<h2 class="mna-title">{{ heading.title }}</h2>{% endif %}
+        {% if heading.subtitle %}<div class="mna-subtitle">{{ heading.subtitle }}</div>{% endif %}
+        {% if description %}<div class="mna-description mna-paragraphs">{{ description }}</div>{% endif %}
+      </div>
+    {% endif %}
+    <div class="my-8 md:my-12 lg:my-14">
+      {% block form %}{{ form }}{% endblock %}
+    </div>
+  </div>
+</div>

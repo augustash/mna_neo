@@ -1,0 +1,44 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: 'Accordion S1'
+status: stable
+description: 'A heading and questions that open one at a time to show their answers.'
+neo: true
+libraryOverrides:
+  dependencies:
+    - neo/library.alpine
+    - neo/library.alpine.collapse
+props:
+  type: object
+  properties:
+    heading:
+      type: heading
+      title: 'Heading'
+      examples:
+        title: 'Frequently Asked Questions'
+    description:
+      type: markup
+      title: 'Description'
+      examples: '<p>Find quick answers to the most common questions here.</p>'
+    items:
+      type: array
+      title: 'Questions'
+      items:
+        type: object
+        title: 'Question'
+        properties:
+          title:
+            type: string
+            title: 'Question'
+          text:
+            type: markup
+            title: 'Answer'
+        required:
+          - title
+      examples:
+        - { title: 'What types of services do you offer?', text: '<p>Heating, cooling and maintenance.</p>' }
+        - { title: 'Do you offer 24/7 emergency service?', text: '<p>Yes.</p>' }
+    scheme:
+      type: scheme
+      title: 'Color Scheme'
+      apply: true
+      examples: default

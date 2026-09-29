@@ -1,0 +1,25 @@
+{#
+  Hero S1 — a page heading, description and buttons, no image.
+  - The text sits 2rem inside the container (3rem above and below it), in at
+    most 60% of it from md; the title is 40px at every width.
+  - Alone on a page, on phones, the text's top margin merges into the
+    section's, as the legacy block wrapper let it (exo made its wrappers flex
+    only on pages with a styled component).
+#}
+<div {{ attributes.addClass('mna-ink') }}>
+  <div class="container-center">
+    <div class="m-8 flex py-4 max-md:[:only-child>*>&]:mt-0">
+      <div class="relative z-[1] text-left md:max-w-[60%]">
+        {% if heading or description %}
+          <div{{ heading.size.addClass('space-y-4') }}>
+            {% if heading.supertitle %}<div class="mna-supertitle">{{ heading.supertitle }}</div>{% endif %}
+            {% if heading.title %}<h2 class="mna-title [--mna-title-max:40] [--mna-title-min:40]">{{ heading.title }}</h2>{% endif %}
+            {% if heading.subtitle %}<div class="mna-subtitle">{{ heading.subtitle }}</div>{% endif %}
+            {% if description %}<div class="mna-description mna-paragraphs">{{ description }}</div>{% endif %}
+          </div>
+        {% endif %}
+        {% include '@mna_neo/includes/links.html.twig' with {links: links, class: 'mt-4 lg:mt-8'} only %}
+      </div>
+    </div>
+  </div>
+</div>

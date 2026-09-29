@@ -1,0 +1,10 @@
+# The MNA look shared by every component here: fluid type and the component
+# heading, description and spacing scales, as Tailwind utilities. Imported
+# into the front scope's Tailwind build (neo: import).
+utilities:
+  version: VERSION
+  neo:
+    import: true
+  css:
+    theme:
+      src/css/utilities.css: { minified: true }

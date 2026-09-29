@@ -1,0 +1,16 @@
+{
+  "name": "augustash/mna_neo",
+  "description": "Neo Alchemist components shared by MNA sites.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://github.com/augustash/mna_neo",
+  "support": {
+    "source": "https://github.com/augustash/mna_neo"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "drupal/core": "^10.3 || ^11",
+    "jacerider/neo_alchemist": "^1.1"
+  }
+}

@@ -1,0 +1,54 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: 'Logos S1'
+status: stable
+description: 'A centred heading over a grid of logos.'
+neo: true
+props:
+  type: object
+  properties:
+    heading:
+      type: heading
+      title: 'Heading'
+      examples:
+        title: 'Brands we trust'
+        size: lg
+    description:
+      type: markup
+      title: 'Description'
+      examples: ''
+    links:
+      type: array
+      title: 'Links'
+      maxItems: 2
+      items:
+        type: object
+        title: 'Link'
+        properties:
+          link:
+            type: link
+            title: 'Link'
+      examples: []
+    logos:
+      type: array
+      title: 'Logos'
+      items:
+        type: object
+        title: 'Logo'
+        properties:
+          image:
+            type: image
+            title: 'Logo'
+      examples:
+        - { image: { src: 'https://placehold.co/175x175.png', alt: 'Logo', width: 175, height: 175 } }
+        - { image: { src: 'https://placehold.co/175x175.png', alt: 'Logo', width: 175, height: 175 } }
+    scheme:
+      type: scheme
+      title: 'Color Scheme'
+      apply: true
+      examples: offset
+    spacing:
+      type: spacing
+      title: 'Spacing'
+      examples: md
+    gap:
+      type: gap

@@ -1,0 +1,51 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: 'Webform S2'
+status: stable
+description: 'A heading, text and a webform beside an image with an optional sidebar title and text.'
+neo: true
+props:
+  type: object
+  properties:
+    heading:
+      type: heading
+      title: 'Heading'
+      examples:
+        title: 'Schedule Your HVAC Service'
+    description:
+      type: markup
+      title: 'Description'
+      examples: '<p>Need help with heating, cooling, or maintenance?</p>'
+    image:
+      type: image
+      title: 'Image'
+      examples:
+        src: 'https://placehold.co/860x573.png'
+        alt: 'Placeholder'
+        width: 860
+        height: 573
+    sidebar_title:
+      type: string
+      title: 'Sidebar title'
+      examples: ['']
+    sidebar_text:
+      type: markup
+      title: 'Sidebar text'
+      examples: ''
+    position:
+      type: string
+      title: 'Sidebar position'
+      description: 'Beside the form from 1024px.'
+      enum:
+        - left
+        - right
+      examples:
+        - left
+    scheme:
+      type: scheme
+      title: 'Color Scheme'
+      apply: true
+      examples: offset
+slots:
+  form:
+    title: 'Form'
+    description: 'The webform, picked per section.'

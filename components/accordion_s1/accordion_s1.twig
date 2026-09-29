@@ -1,0 +1,35 @@
+{#
+  Accordion S1 — a heading and questions that open one at a time.
+  - No spacing of its own, as the legacy accordions (stacked, they read as
+    one list); the heading block has 1rem above and below.
+  - Questions are the rich text h4, followed by a plus; answers slide open
+    (Alpine collapse) and are rich text.
+  - As a page's first or last section it takes the page offsets
+    (--spacing-component-t/-b, front's _utilities.css).
+#}
+{% set id = 'accordion-' ~ random() %}
+<div {{ attributes.addClass(['bg-default', 'component-bg', 'mna-ink', 'pt-[var(--spacing-component-t,0px)]', 'pb-[var(--spacing-component-b,0px)]']) }} x-data="{ open: null }">
+  <div class="container-center px-4">
+    {% if heading or description %}
+      <div{{ heading.size.addClass(['space-y-4', 'py-4']) }}>
+        {% if heading.supertitle %}<div class="mna-supertitle">{{ heading.supertitle }}</div>{% endif %}
+        {% if heading.title %}<h2 class="mna-title">{{ heading.title }}</h2>{% endif %}
+        {% if heading.subtitle %}<div class="mna-subtitle">{{ heading.subtitle }}</div>{% endif %}
+        {% if description %}<div class="mna-description mna-paragraphs">{{ description }}</div>{% endif %}
+      </div>
+    {% endif %}
+    {% if items %}
+      <div class="mna-prose">
+        {% for item in items %}
+          {% set key = loop.index0 %}
+          <div class="pb-4">
+            <h4 id="{{ id }}-trigger-{{ key }}" class="cursor-pointer" role="button" tabindex="0" aria-controls="{{ id }}-content-{{ key }}" :aria-expanded="(open === {{ key }}).toString()" @click="open = open === {{ key }} ? null : {{ key }}" @keydown.enter.prevent="open = open === {{ key }} ? null : {{ key }}" @keydown.space.prevent="open = open === {{ key }} ? null : {{ key }}">{{ item.title }} <span>{{ icon('plus') }}</span></h4>
+            <div id="{{ id }}-content-{{ key }}" role="region" aria-labelledby="{{ id }}-trigger-{{ key }}" x-show="open === {{ key }}" x-collapse x-cloak>
+              {{ item.text }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>

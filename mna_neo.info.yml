@@ -1,0 +1,9 @@
+name: 'MNA Neo'
+type: module
+description: 'Neo Alchemist components shared by MNA sites.'
+package: MNA
+core_version_requirement: ^10.3 || ^11
+dependencies:
+  - neo_alchemist:neo_alchemist
+neo:
+  scope: front

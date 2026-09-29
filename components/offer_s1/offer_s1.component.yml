@@ -1,0 +1,52 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: 'Offer S1'
+status: stable
+description: 'An offer in a dashed card: an image beside a heading, text and buttons, with a corner ribbon.'
+neo: true
+props:
+  type: object
+  properties:
+    heading:
+      type: heading
+      title: 'Heading'
+      description: 'The supertitle is the corner ribbon.'
+      examples:
+        supertitle: 'Limited time'
+        title: 'Pellentesque euismod pellentesque eleifend'
+    description:
+      type: markup
+      title: 'Description'
+      examples: '<p>Vivamus a iaculis nibh. Proin pellentesque nec nulla eget convallis.</p>'
+    image:
+      type: image
+      title: 'Image'
+      examples:
+        src: 'https://placehold.co/860x484.png'
+        alt: 'Placeholder'
+        width: 860
+        height: 484
+    links:
+      type: array
+      title: 'Links'
+      maxItems: 2
+      items:
+        type: object
+        title: 'Link'
+        properties:
+          link:
+            type: link
+            title: 'Link'
+      examples:
+        - { link: { uri: 'internal:/', title: 'Claim offer' } }
+    scheme:
+      type: scheme
+      title: 'Color Scheme'
+      description: 'The card.'
+      apply: true
+      examples: default
+    spacing:
+      type: spacing
+      title: 'Spacing'
+      examples: md
+    gap:
+      type: gap

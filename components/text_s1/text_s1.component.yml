@@ -1,0 +1,40 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: 'Text S1'
+status: stable
+description: 'Rich text up to 800px wide, with up to two buttons below it.'
+neo: true
+props:
+  type: object
+  properties:
+    content:
+      type: markup
+      title: 'Text'
+      examples: '<h2>Formatted H2</h2><p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p><h3>Formatted H3</h3><p>Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue.</p>'
+    position:
+      type: string
+      title: 'Position'
+      description: 'Left in the container, or centred with the buttons.'
+      enum:
+        - left
+        - center
+      examples:
+        - left
+    links:
+      type: array
+      title: 'Links'
+      maxItems: 2
+      items:
+        type: object
+        title: 'Link'
+        properties:
+          link:
+            type: link
+            title: 'Link'
+      examples:
+        - { link: { uri: 'internal:/', title: 'Primary link' } }
+    spacing:
+      type: spacing
+      title: 'Spacing'
+      examples: md
+    gap:
+      type: gap

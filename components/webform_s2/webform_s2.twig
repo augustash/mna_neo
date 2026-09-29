@@ -1,0 +1,46 @@
+{#
+  Webform S2 — heading, text and a webform beside a sidebar (image, title,
+  text).
+  - From lg the sidebar and the form are halves of the container, the form
+    7rem clear of the sidebar; `position: right` puts the sidebar right.
+    Below lg they stack, sidebar first.
+  - Each half has the section spacing above and below (merging between them
+    when stacked); the section contains it, so a coloured band covers it.
+  - As a page's first or last section it takes the page offsets
+    (--spacing-component-t/-b, front's _utilities.css).
+#}
+{% set right = position == 'right' %}
+<div {{ attributes.addClass(['flex', 'bg-default', 'component-bg', 'mna-ink', 'pt-[var(--spacing-component-t,0px)]', 'pb-[var(--spacing-component-b,0px)]']) }}>
+  <div class="container-center px-4">
+    <div class="lg:flex">
+      {% if image.src or sidebar_title or sidebar_text %}
+        <div class="my-8 md:my-12 lg:my-14 lg:w-1/2 {{ right ? 'lg:order-2' }}">
+          {% if image.src %}
+            {{ neo_image(image.uri ?: image.src, {
+              sm: {op: 'scale', width: 640},
+              md: {op: 'scale', width: 510},
+              lg: {op: 'scale', width: 860},
+            }, image.alt, '', {class: ['block', 'w-full', 'h-auto']}) }}
+          {% endif %}
+          {% if sidebar_title %}
+            <h3 class="mna-title mt-6 mb-4 [--mna-title-max:30] [--mna-title-min:22] md:mt-9 lg:mt-[2.625rem]">{{ sidebar_title }}</h3>
+          {% endif %}
+          {% if sidebar_text %}
+            <div class="mna-prose">{{ sidebar_text }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="my-8 md:my-12 lg:my-14 lg:w-1/2 {{ right ? 'lg:pr-28' : 'lg:pl-28' }}">
+        {% if heading or description %}
+          <div{{ heading.size.addClass(['space-y-4', 'mb-8', 'md:mb-12', 'lg:mb-14']) }}>
+            {% if heading.supertitle %}<div class="mna-supertitle">{{ heading.supertitle }}</div>{% endif %}
+            {% if heading.title %}<h2 class="mna-title">{{ heading.title }}</h2>{% endif %}
+            {% if heading.subtitle %}<div class="mna-subtitle">{{ heading.subtitle }}</div>{% endif %}
+            {% if description %}<div class="mna-description mna-paragraphs">{{ description }}</div>{% endif %}
+          </div>
+        {% endif %}
+        {% block form %}{{ form }}{% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

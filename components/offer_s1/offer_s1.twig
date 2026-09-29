@@ -1,0 +1,38 @@
+{#
+  Offer S1 — an offer in a dashed card.
+  - The section is in the scheme; the card is white, with a 2px dashed border and padding of 3/4 the section spacing;
+    the supertitle is a navy ribbon across its top right corner.
+  - From md the image takes 40% (the section spacing clear of the text) and
+    the text 60%, centred on each other; without an image the text is full
+    width and its buttons sit right.
+#}
+<div {{ attributes.addClass(['bg-default', 'component-bg', 'mna-ink']) }}>
+  <div class="container-center px-4">
+    <div class="relative overflow-hidden border-2 border-dashed border-[#373a3c] bg-[#fff] p-6 md:p-9 lg:p-[2.625rem]">
+      {% if heading.supertitle %}
+        <div class="absolute top-[2.8125rem] -right-[12.8125rem] z-10 w-125 origin-top rotate-45 bg-primary-500 px-45 py-2 text-center text-[#fff]">{{ heading.supertitle }}</div>
+      {% endif %}
+      <div class="md:flex md:items-center">
+        {% if image.src %}
+          <div class="mb-4 md:mb-0 md:w-2/5 md:pr-12 lg:pr-14">
+            {{ neo_image(image.uri ?: image.src, {
+              sm: {op: 'scale', width: 640},
+              md: {op: 'scale', width: 510},
+              lg: {op: 'scale', width: 860},
+            }, image.alt, '', {class: ['block', 'w-full', 'h-auto']}) }}
+          </div>
+        {% endif %}
+        <div class="w-full {{ image.src ? 'md:w-3/5 md:[&_.mna-pad]:pr-[5.625rem]' }}">
+          {% if heading.title or heading.subtitle or description %}
+            <div{{ heading.size.addClass('space-y-4') }}>
+              {% if heading.title %}<h2 class="mna-pad mna-title">{{ heading.title }}</h2>{% endif %}
+              {% if heading.subtitle %}<div class="mna-pad mna-subtitle">{{ heading.subtitle }}</div>{% endif %}
+              {% if description %}<div class="mna-pad mna-description mna-paragraphs">{{ description }}</div>{% endif %}
+            </div>
+          {% endif %}
+          {% include '@mna_neo/includes/links.html.twig' with {links: links, class: 'mt-4 lg:mt-8' ~ (image.src ? '' : ' text-right')} only %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

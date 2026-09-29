@@ -1,0 +1,31 @@
+{#
+  Logos S1 — a centred heading over a grid of logos.
+  - The heading is at most 800px wide, centred, with twice the section
+    spacing above it (the section's own, and as much again).
+  - Logos are 175px squares, two to a row on phones, three from md and five
+    from lg, centred.
+#}
+<div {{ attributes.addClass(['bg-default', 'component-bg', 'mna-ink']) }}>
+  <div class="container-center px-4">
+    {% if heading or description or links %}
+      <div class="mx-auto max-w-200 text-center pt-8 md:pt-12 lg:pt-14">
+        <div{{ heading.size.addClass('space-y-4') }}>
+          {% if heading.supertitle %}<div class="mna-supertitle">{{ heading.supertitle }}</div>{% endif %}
+          {% if heading.title %}<h2 class="mna-title">{{ heading.title }}</h2>{% endif %}
+          {% if heading.subtitle %}<div class="mna-subtitle">{{ heading.subtitle }}</div>{% endif %}
+          {% if description %}<div class="mna-description mna-paragraphs">{{ description }}</div>{% endif %}
+        </div>
+        {% include '@mna_neo/includes/links.html.twig' with {links: links, class: 'mt-4 lg:mt-8'} only %}
+      </div>
+    {% endif %}
+    {% if logos %}
+      <div class="flex flex-wrap items-center justify-center overflow-hidden pt-8 md:pt-12 lg:pt-14">
+        {% for logo in logos|filter(logo => logo.image.src) %}
+          <div class="mb-4 w-1/2 px-4 md:w-1/3 lg:w-1/5">
+            {{ neo_image(logo.image.uri ?: logo.image.src, {focal: {width: 175, height: 175}}, logo.image.alt, '', {class: ['mx-auto', 'block', 'h-auto', 'max-w-full']}) }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,53 @@
+$schema: 'https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json'
+name: 'Image Text S1'
+status: stable
+description: 'An image beside a heading, rich text and up to two buttons, the image on either side.'
+neo: true
+props:
+  type: object
+  properties:
+    heading:
+      type: heading
+      title: 'Heading'
+      examples:
+        title: 'Pellentesque euismod pellentesque eleifend'
+    description:
+      type: markup
+      title: 'Text'
+      examples: '<p>Vivamus a iaculis nibh. Proin pellentesque nec nulla eget convallis. Nam nunc diam, posuere eget placerat condimentum, consequat sed tortor.</p>'
+    image:
+      type: image
+      title: 'Image'
+      examples:
+        src: 'https://placehold.co/860x565.png'
+        alt: 'Placeholder'
+        width: 860
+        height: 565
+    position:
+      type: string
+      title: 'Image position'
+      description: 'Beside the text from 768px; phones show the image first.'
+      enum:
+        - left
+        - right
+      examples:
+        - right
+    links:
+      type: array
+      title: 'Links'
+      maxItems: 2
+      items:
+        type: object
+        title: 'Link'
+        properties:
+          link:
+            type: link
+            title: 'Link'
+      examples:
+        - { link: { uri: 'internal:/', title: 'Primary link' } }
+    spacing:
+      type: spacing
+      title: 'Spacing'
+      examples: md
+    gap:
+      type: gap

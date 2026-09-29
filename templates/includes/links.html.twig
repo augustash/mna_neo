@@ -1,0 +1,20 @@
+{#
+  The legacy component links: a solid button, then an outline one, 1rem
+  apart from 768px. Phones stack them (see mna-btn).
+  - links: a component's `links` prop, rows of {link}.
+  - class: the wrapper's classes.
+  A link the visitor cannot reach keeps its label, unlinked.
+#}
+{% set links = (links ?: [])|column('link')|filter(link => link) %}
+{% if links %}
+  <div class="{{ class }}">
+    {% for link in links %}
+      {% set button = loop.first ? 'mna-btn' : 'mna-btn-outline md:ml-4' %}
+      {% if link.access %}
+        <a href="{{ neo_uri(link.uri, link.options) }}" target="{{ link.target }}" class="{{ button }}">{{ link.title }}</a>
+      {% else %}
+        <span class="{{ button }}">{{ link.title }}</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
