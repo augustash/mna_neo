@@ -3,7 +3,7 @@ type: module
 description: 'Neo Alchemist components shared by MNA sites.'
 package: MNA
 core_version_requirement: ^10.3 || ^11
-version: VERSION
+version: 1.0.0
 dependencies:
   - neo_alchemist:neo_alchemist
 neo:
